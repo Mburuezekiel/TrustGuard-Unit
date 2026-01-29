@@ -106,7 +106,7 @@ export const SMSGatewayService = () => {
             <div className="p-4 rounded-xl bg-accent/10 border border-accent/20">
               <div className="flex items-center gap-2 mb-2">
                 <Zap className="w-5 h-5 text-accent" />
-                <span className="font-semibold text-foreground">Short Code: 20XXX</span>
+                <span className="font-semibold text-foreground">Short Code:*765#</span>
               </div>
               <p className="text-sm text-muted-foreground">
                 Forward any suspicious message to this short code. You'll receive 
