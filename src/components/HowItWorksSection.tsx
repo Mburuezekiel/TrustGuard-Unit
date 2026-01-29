@@ -5,7 +5,7 @@ const steps = [
     number: "01",
     icon: MessageSquare,
     title: "Receive SMS",
-    description: "When you receive a suspicious SMS about M-PESA or money, TrustGuard AI automatically starts analyzing.",
+    description: "When you receive a suspicious SMS about M-PESA or money, TrustGuard Unit automatically starts analyzing.",
   },
   {
     number: "02",
@@ -34,7 +34,7 @@ export const HowItWorksSection = () => {
             Simple Protection
           </span>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-            How TrustGuard AI Works
+            How TrustGuard Unit Works
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Protection happens automatically in three simple steps

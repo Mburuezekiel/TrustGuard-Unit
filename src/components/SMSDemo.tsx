@@ -149,7 +149,7 @@ export const SMSDemo = () => {
             Test Our Fraud Detection
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Paste any suspicious SMS message to see how TrustGuard AI analyzes it
+            Paste any suspicious SMS message to see how TrustGuard Unit analyzes it
           </p>
         </div>
 

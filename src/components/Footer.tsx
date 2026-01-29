@@ -48,7 +48,7 @@ export const Footer = () => {
 
         <div className="border-t border-background/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-background/50">
-            © 2025 TrustGuard AI. All rights reserved.
+            © 2025 TrustGuard Unit. All rights reserved.
           </p>
           <div className="flex items-center gap-6">
             <a href="#" className="text-sm text-background/50 hover:text-background transition-colors">Privacy Policy</a>

@@ -21,7 +21,7 @@ export const CTASection = () => {
           </h2>
           
           <p className="text-lg text-primary-foreground/80 mb-10 max-w-xl mx-auto">
-            Join over 100,000 Kenyans who trust TrustGuard AI to keep their M-PESA safe from scammers. Free to start, powerful protection from day one.
+            Join over 100,000 Kenyans who trust TrustGuard Unit to keep their M-PESA safe from scammers. Free to start, powerful protection from day one.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

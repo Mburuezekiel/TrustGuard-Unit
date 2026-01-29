@@ -11,7 +11,7 @@ export const Header = () => {
             <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full" />
           </div>
           <span className="font-display font-bold text-xl text-foreground">
-            TrustGuard<span className="text-primary">AI</span>
+            TrustGuard<span className="text-primary">Unit</span>
           </span>
         </div>
         
@@ -25,6 +25,10 @@ export const Header = () => {
           <a href="#demo" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
             Try Demo
           </a>
+           <a href="#sniff" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+            Sniff
+          </a>
+          
         </nav>
 
         <div className="flex items-center gap-3">
