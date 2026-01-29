@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { ShieldIcon } from "./icons/ShieldIcon";
 import { Button } from "./ui/button";
 
@@ -17,24 +18,29 @@ export const CTASection = () => {
           </div>
           
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-primary-foreground mb-6">
-            Protect Your Mobile Money Today
+            Protect Your Finances Today
           </h2>
           
           <p className="text-lg text-primary-foreground/80 mb-10 max-w-xl mx-auto">
-            Join over 100,000 Kenyans who trust TrustGuard Unit to keep their M-PESA safe from scammers. Free to start, powerful protection from day one.
+            Join over 100,000 users who trust TrustGuardUnit to keep their finances 
+            safe from scammers. Free to start, powerful protection from day one.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button variant="hero" size="xl">
-              Get Protected Free
-            </Button>
-            <Button variant="heroOutline" size="xl">
-              Contact Sales
-            </Button>
+            <Link to="/signup">
+              <Button variant="hero" size="xl">
+                Get Protected Free
+              </Button>
+            </Link>
+            <Link to="/pricing">
+              <Button variant="heroOutline" size="xl">
+                View Pricing
+              </Button>
+            </Link>
           </div>
 
           <p className="mt-8 text-sm text-primary-foreground/60">
-            No credit card required • Works with all mobile networks • Privacy first
+            No credit card required • Works with all financial institutions • Privacy first
           </p>
         </div>
       </div>
