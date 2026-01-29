@@ -24,7 +24,7 @@ const features = [
   {
     icon: Users,
     title: "Community Intelligence",
-    description: "Benefit from collective fraud reports that strengthen protection for all Kenyan mobile money users.",
+    description: "Benefit from collective fraud reports that strengthen protection for all financial service users.",
     color: "bg-safe/10 text-safe",
   },
   {
@@ -41,8 +41,8 @@ const features = [
   },
   {
     icon: Globe,
-    title: "Kenya-Specific Intelligence",
-    description: "Trained on local scam patterns, Swahili/Sheng phrases, and M-PESA-specific fraud tactics.",
+    title: "Regional Intelligence",
+    description: "Trained on local scam patterns, regional languages, and financial institution-specific fraud tactics.",
     color: "bg-danger/10 text-danger",
   },
 ];
@@ -58,10 +58,10 @@ export const FeaturesSection = () => {
             <span className="text-sm font-medium text-primary">Powerful Protection</span>
           </div>
           <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-foreground mb-4">
-            Built for Kenya's Mobile Money Users
+            Built for Financial Service Users
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Comprehensive fraud detection designed specifically for M-PESA and other mobile money services.
+            Comprehensive fraud detection designed specifically for mobile money and financial institutions.
           </p>
         </div>
 

@@ -3,9 +3,10 @@ import { HeroSection } from "@/components/HeroSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { HowItWorksSection } from "@/components/HowItWorksSection";
 import { SMSDemo } from "@/components/SMSDemo";
+import { SMSGatewayService } from "@/components/SMSGatewayService";
+import SniffSection from "@/components/PaymentTests";
 import { CTASection } from "@/components/CTASection";
 import { Footer } from "@/components/Footer";
-import PaymentTest from "@/components/PaymentTests";
 
 const Index = () => {
   return (
@@ -16,7 +17,8 @@ const Index = () => {
         <FeaturesSection />
         <HowItWorksSection />
         <SMSDemo />
-        <PaymentTest />
+        <SMSGatewayService />
+        <SniffSection />
         <CTASection />
       </main>
       <Footer />

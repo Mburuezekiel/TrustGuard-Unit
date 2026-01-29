@@ -1,6 +1,7 @@
 import { ShieldIcon } from "./icons/ShieldIcon";
 import { Button } from "./ui/button";
 import { Shield, Zap, Users } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const HeroSection = () => {
   return (
@@ -22,7 +23,7 @@ export const HeroSection = () => {
               <span className="relative inline-flex rounded-full h-2 w-2 bg-safe"></span>
             </span>
             <span className="text-sm text-primary-foreground/90 font-medium">
-              Protecting 100,000+ Kenyans from mobile money fraud
+              Protecting 100,000+ users from financial fraud
             </span>
           </div>
 
@@ -30,23 +31,28 @@ export const HeroSection = () => {
           <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-primary-foreground mb-6 animate-fade-in" style={{ animationDelay: "0.1s" }}>
             Real-Time Protection for
             <span className="block mt-2 bg-gradient-to-r from-accent to-yellow-300 bg-clip-text text-transparent">
-              Kenya's Mobile Money
+              Your Financial Safety
             </span>
           </h1>
 
           {/* Subtitle */}
           <p className="text-lg sm:text-xl text-primary-foreground/80 mb-10 max-w-2xl mx-auto animate-fade-in" style={{ animationDelay: "0.2s" }}>
-            AI-powered fraud detection that analyzes SMS messages instantly, alerts you before you act, and educates you to stay safe. Built for M-PESA users.
+            AI-powered fraud detection that analyzes SMS messages instantly, alerts you before you act, 
+            and educates you to stay safe. Built for mobile money and financial institution users.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in" style={{ animationDelay: "0.3s" }}>
-            <Button variant="hero" size="xl">
-              Start Free Protection
-            </Button>
-            <Button variant="heroOutline" size="xl">
-              Watch Demo
-            </Button>
+            <Link to="/signup">
+              <Button variant="hero" size="xl">
+                Start Free Protection
+              </Button>
+            </Link>
+            <a href="#demo">
+              <Button variant="heroOutline" size="xl">
+                Watch Demo
+              </Button>
+            </a>
           </div>
 
           {/* Stats */}
