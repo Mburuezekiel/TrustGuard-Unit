@@ -1,8 +1,11 @@
 import { Check, X, Zap, Crown, Shield } from "lucide-react";
+ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ShieldIcon } from "@/components/icons/ShieldIcon";
 import { Link } from "react-router-dom";
+ import { MpesaPaymentModal } from "@/components/MpesaPaymentModal";
+ import { useToast } from "@/hooks/use-toast";
 
 const pricingPlans = [
   {
@@ -71,6 +74,40 @@ const pricingPlans = [
 ];
 
 const Pricing = () => {
+   const [paymentModal, setPaymentModal] = useState<{ open: boolean; plan: string; amount: number } | null>(null);
+   const { toast } = useToast();
+ 
+   const handleSelectPlan = (plan: typeof pricingPlans[0]) => {
+     if (plan.name === "Free") {
+       // Redirect to signup for free plan
+       window.location.href = "/signup";
+       return;
+     }
+     
+     if (plan.name === "Business") {
+       // Contact sales for enterprise
+       window.location.href = "/contact";
+       return;
+     }
+     
+     // Open M-Pesa payment for Premium
+     setPaymentModal({
+       open: true,
+       plan: plan.name,
+       amount: parseInt(plan.price.replace(/,/g, '')),
+     });
+   };
+ 
+   const handlePaymentSuccess = () => {
+     toast({
+       title: "Subscription Active!",
+       description: "Your premium features are now unlocked.",
+     });
+     setTimeout(() => {
+       window.location.href = "/app";
+     }, 2000);
+   };
+ 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
@@ -162,10 +199,17 @@ const Pricing = () => {
                     ))}
                   </ul>
                   <Link to="/signup">
-                    <Button variant={plan.variant} className="w-full" size="lg">
+                   <Button 
+                     variant={plan.variant} 
+                     className="w-full" 
+                     size="lg"
+                     onClick={(e) => {
+                       e.preventDefault();
+                       handleSelectPlan(plan);
+                     }}
+                   >
                       {plan.cta}
                     </Button>
-                  </Link>
                 </CardContent>
               </Card>
             ))}
@@ -212,6 +256,17 @@ const Pricing = () => {
           </p>
         </div>
       </footer>
+ 
+       {/* M-Pesa Payment Modal */}
+       {paymentModal && (
+         <MpesaPaymentModal
+           isOpen={paymentModal.open}
+           onClose={() => setPaymentModal(null)}
+           planName={paymentModal.plan}
+           amount={paymentModal.amount}
+           onSuccess={handlePaymentSuccess}
+         />
+       )}
     </div>
   );
 };

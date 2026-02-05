@@ -13,29 +13,21 @@ interface Message {
   timestamp: Date;
 }
 
-const botResponses: { [key: string]: string } = {
-  hello: "Hello! I'm TrustGuard Assistant. How can I help you stay safe from financial scams today?",
-  hi: "Hi there! I'm here to help you with fraud protection. What would you like to know?",
-  scam: "If you've received a suspicious message, here's what to do:\n\n1. Don't click any links\n2. Don't send any money\n3. Forward the message to our short code 20XXX\n4. Block the sender\n\nWould you like me to explain common scam patterns?",
-  money: "Never send money to unknown accounts, even if the message claims to be from a financial institution. Legitimate organizations will never ask you to send money via SMS. Report such messages to us immediately.",
-  "how does it work": "TrustGuardUnit works by analyzing SMS messages using AI:\n\n1. You forward suspicious messages to us\n2. Our AI analyzes the content in real-time\n3. We send you back a safety rating\n4. You make informed decisions\n\nIt works on any phone—no app required!",
-  pricing: "We offer three plans:\n\n• Free: 5 scans/day, basic protection\n• Premium (KES 499/mo): Unlimited scans, real-time alerts\n• Business (KES 4,999/mo): Enterprise features, API access\n\nVisit our pricing page for more details!",
-  safe: "To stay safe from financial fraud:\n\n✓ Never share PINs or passwords\n✓ Verify sender identity independently\n✓ Be suspicious of urgent requests\n✓ Use TrustGuardUnit to check messages\n✓ Report scams to help others",
-  report: "To report a scam:\n\n1. Forward the message to 20XXX\n2. We'll analyze and log it\n3. Your report helps protect others\n\nYou can also report directly on our platform if you have an account.",
-  default: "I'm here to help with fraud protection! You can ask me about:\n\n• How to identify scams\n• What to do if you receive suspicious messages\n• How TrustGuardUnit works\n• Pricing and plans\n• How to report fraud\n\nWhat would you like to know?",
-};
-
-const findResponse = (input: string): string => {
-  const lowerInput = input.toLowerCase();
-  
-  for (const [key, response] of Object.entries(botResponses)) {
-    if (key !== "default" && lowerInput.includes(key)) {
-      return response;
-    }
-  }
-  
-  return botResponses.default;
-};
+ const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1';
+ const MAX_HISTORY = 10;
+ 
+ const SYSTEM_PROMPT = `You are TrustGuard Assistant, an AI assistant for TrustGuardUnit - a fraud detection platform.
+ Your role is to help users stay safe from financial scams, phishing, and fraud.
+ 
+ Key topics you can help with:
+ - How to identify scam messages and calls
+ - What to do when receiving suspicious messages
+ - How TrustGuardUnit works (AI-powered SMS/call analysis)
+ - Pricing plans (Free, Premium KES 499/mo, Business KES 4,999/mo)
+ - Reporting scams through our platform
+ - General security best practices
+ 
+ Be friendly, helpful, and concise. Use emojis occasionally. If asked about topics outside fraud protection, politely redirect to your expertise area.`;
 
 export const Chatbot = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +41,9 @@ export const Chatbot = () => {
   ]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+   const [conversationHistory, setConversationHistory] = useState<Array<{ role: string; content: string }>>([
+     { role: "system", content: SYSTEM_PROMPT },
+   ]);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -59,7 +54,7 @@ export const Chatbot = () => {
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = () => {
+   const handleSend = async () => {
     if (!input.trim()) return;
 
     const userMessage: Message = {
@@ -70,20 +65,60 @@ export const Chatbot = () => {
     };
 
     setMessages((prev) => [...prev, userMessage]);
+     
+     // Update conversation history with user message
+     const updatedHistory = [
+       ...conversationHistory,
+       { role: "user", content: input },
+     ].slice(-MAX_HISTORY - 1); // Keep last 10 exchanges + system prompt
+     setConversationHistory(updatedHistory);
+     
     setInput("");
     setIsTyping(true);
 
-    // Simulate bot response delay
-    setTimeout(() => {
+     try {
+       // Call Gemini API through backend
+       const response = await fetch(`${API_BASE_URL}/chat/gemini`, {
+         method: 'POST',
+         headers: { 'Content-Type': 'application/json' },
+         body: JSON.stringify({ 
+           messages: updatedHistory,
+           userMessage: input,
+         }),
+       });
+ 
+       let botResponse = "I'm sorry, I couldn't process that request. Please try again.";
+       
+       if (response.ok) {
+         const data = await response.json();
+         botResponse = data.response || data.text || botResponse;
+         
+         // Update conversation history with assistant response
+         setConversationHistory(prev => [
+           ...prev,
+           { role: "assistant", content: botResponse },
+         ].slice(-MAX_HISTORY - 1));
+       }
+ 
       const botMessage: Message = {
         id: Date.now() + 1,
-        text: findResponse(input),
+         text: botResponse,
         sender: "bot",
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, botMessage]);
-      setIsTyping(false);
-    }, 1000 + Math.random() * 1000);
+     } catch (error) {
+       console.error('Chatbot error:', error);
+       const errorMessage: Message = {
+         id: Date.now() + 1,
+         text: "I'm having trouble connecting. Please try again in a moment.",
+         sender: "bot",
+         timestamp: new Date(),
+       };
+       setMessages((prev) => [...prev, errorMessage]);
+     } finally {
+       setIsTyping(false);
+     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
