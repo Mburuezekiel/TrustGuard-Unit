@@ -198,7 +198,6 @@ const Pricing = () => {
                       </li>
                     ))}
                   </ul>
-                  <Link to="/signup">
                    <Button 
                      variant={plan.variant} 
                      className="w-full" 
