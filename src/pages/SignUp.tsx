@@ -1,4 +1,4 @@
-import { useState } from "react";
+ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -6,7 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { ShieldIcon } from "@/components/icons/ShieldIcon";
 import { Mail, Lock, Eye, EyeOff, User, Phone } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
+ import { useToast } from "@/hooks/use-toast";
+ import { useAuth } from "@/contexts/AuthContext";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -20,6 +21,13 @@ const SignUp = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+   const { register, isAuthenticated } = useAuth();
+ 
+   useEffect(() => {
+     if (isAuthenticated) {
+       navigate("/app", { replace: true });
+     }
+   }, [isAuthenticated, navigate]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -38,16 +46,24 @@ const SignUp = () => {
     }
 
     setIsLoading(true);
-    
-    // Simulate registration with dummy data
-    setTimeout(() => {
+ 
+     const result = await register(formData.phone, formData.password, formData.email, formData.name);
+     
+     if (result.success) {
       toast({
         title: "Account created!",
-        description: "Welcome to TrustGuardUnit. Your protection starts now.",
+         description: "Please sign in with your credentials.",
       });
       navigate("/signin");
-      setIsLoading(false);
-    }, 1500);
+     } else {
+       toast({
+         title: "Registration failed",
+         description: result.error || "Please try again.",
+         variant: "destructive",
+       });
+     }
+     
+     setIsLoading(false);
   };
 
   return (
