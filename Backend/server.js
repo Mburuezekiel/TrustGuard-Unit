@@ -12,6 +12,11 @@ const analyzeRoutes = require('./src/routes/analyze.routes');
 const reportRoutes = require('./src/routes/report.routes');
 const trustcardRoutes = require('./src/routes/trustcard.routes');
 const blockchainRoutes = require('./src/routes/blockchain.routes');
+ const paymentRoutes = require('./src/routes/payment.routes');
+ const supportRoutes = require('./src/routes/support.routes');
+ const blogRoutes = require('./src/routes/blog.routes');
+ const businessRoutes = require('./src/routes/business.routes');
+ const chatRoutes = require('./src/routes/chat.routes');
 
 // Import middleware
 const errorHandler = require('./src/middleware/errorHandler');
@@ -58,6 +63,11 @@ app.use(`/api/${apiVersion}/analyze`, analyzeRoutes);
 app.use(`/api/${apiVersion}/reports`, reportRoutes);
 app.use(`/api/${apiVersion}/trustcard`, trustcardRoutes);
 app.use(`/api/${apiVersion}/blockchain`, blockchainRoutes);
+ app.use(`/api/${apiVersion}/payments`, paymentRoutes);
+ app.use(`/api/${apiVersion}/support`, supportRoutes);
+ app.use(`/api/${apiVersion}/blog`, blogRoutes);
+ app.use(`/api/${apiVersion}/business`, businessRoutes);
+ app.use(`/api/${apiVersion}/chat`, chatRoutes);
 
 // Error handling
 app.use(errorHandler);
