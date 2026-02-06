@@ -26,7 +26,7 @@ const app = express();
 // Security middleware
 app.use(helmet());
 app.use(cors({
-  origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:8080'],
+  origin: process.env.ALLOWED_ORIGINS?.split(',') || ['http://localhost:8080', 'https://m-pesa-shield-1.onrender.com'],
   credentials: true
 }));
 
