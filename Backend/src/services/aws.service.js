@@ -141,7 +141,6 @@ const invokeFraudModel = async (features) => {
 };
 
 module.exports = {
-  sendSMSNotification,
   publishAlert,
   storeReputation,
   getReputation,
