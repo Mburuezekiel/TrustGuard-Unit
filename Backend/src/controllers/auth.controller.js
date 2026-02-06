@@ -20,31 +20,20 @@ exports.register = async (req, res, next) => {
       return res.status(400).json({ error: 'User already exists with this phone number' });
     }
 
-    // Create user
+    // Create user - mark as verified immediately for smooth signup
     const user = await User.create({
       phone,
       email,
       password,
-      name
+      name,
+      isVerified: true
     });
-
-    // Generate OTP
-    const { otp, hash, expiresAt } = await generateSecureOTP(user._id, 'registration');
-    user.verificationOTP = otp;
-    user.verificationOTPExpire = expiresAt;
-    await user.save();
-
-    // Send OTP via SMS
-    await sendSMSNotification(phone, `Your ScamAlert verification code is: ${otp}. Valid for 10 minutes.`);
 
     // Log registration
     await logToQLDB('USER_REGISTRATION', { userId: user._id, phone });
 
-    res.status(201).json({
-      success: true,
-      message: 'Registration successful. Please verify your phone number.',
-      otpHash: hash
-    });
+    // Return token directly for auto-login
+    sendTokenResponse(user, 201, res);
   } catch (error) {
     next(error);
   }
