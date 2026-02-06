@@ -8,7 +8,7 @@
    { path: "/app", icon: Shield, label: "Protect" },
    { path: "/pricing", icon: FileText, label: "Plans" },
    { path: "/profile", icon: User, label: "Profile" },
-   { path: "/settings", icon: Settings, label: "Settings" },
+  //  { path: "/settings", icon: Settings, label: "Settings" },
  ];
  
  export const BottomNavigation = () => {
