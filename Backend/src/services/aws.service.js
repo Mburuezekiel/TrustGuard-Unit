@@ -9,33 +9,6 @@ const dynamoClient = new DynamoDBClient({ region: process.env.AWS_REGION });
 const s3Client = new S3Client({ region: process.env.AWS_REGION });
 const sagemakerClient = new SageMakerRuntimeClient({ region: process.env.AWS_REGION });
 
-/**
- * Send SMS notification via AWS SNS
- */
-const sendSMSNotification = async (phoneNumber, message) => {
-  try {
-    const command = new PublishCommand({
-      PhoneNumber: phoneNumber,
-      Message: message,
-      MessageAttributes: {
-        'AWS.SNS.SMS.SenderID': {
-          DataType: 'String',
-          StringValue: 'ScamAlert'
-        },
-        'AWS.SNS.SMS.SMSType': {
-          DataType: 'String',
-          StringValue: 'Transactional'
-        }
-      }
-    });
-
-    const response = await snsClient.send(command);
-    return { success: true, messageId: response.MessageId };
-  } catch (error) {
-    console.error('SNS Send Error:', error);
-    throw new Error('Failed to send SMS notification');
-  }
-};
 
 /**
  * Publish alert to SNS topic
@@ -168,7 +141,6 @@ const invokeFraudModel = async (features) => {
 };
 
 module.exports = {
-  sendSMSNotification,
   publishAlert,
   storeReputation,
   getReputation,
