@@ -45,15 +45,7 @@ const ReportScam = () => {
     e.preventDefault();
     
     // Normalize phone number
-    const normalizedPhone = normalizePhone(formData.scammerPhone);
-    if (!normalizedPhone) {
-      toast({
-        title: "Invalid Phone Number",
-        description: "Please enter a valid phone number",
-        variant: "destructive",
-      });
-      return;
-    }
+    
 
     setIsSubmitting(true);
 
@@ -63,7 +55,7 @@ const ReportScam = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          scammerPhone: normalizedPhone,
+          scammerPhone: normalizePhone(formData.scammerPhone),
         }),
       });
 
