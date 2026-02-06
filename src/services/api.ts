@@ -1,5 +1,5 @@
 // API Configuration and Service
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://m-pesa-shield-1.onrender.com/api/v1';
 
 // Auth token management
 let authToken: string | null = null;

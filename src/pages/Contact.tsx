@@ -8,9 +8,10 @@
  import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
  import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
  import { Mail, Phone, MapPin, Send, CheckCircle, MessageSquare, Clock } from "lucide-react";
- import { useToast } from "@/hooks/use-toast";
+ import { useToast } from "@/hooks/use-toast"
+import {Header} from "@/components/Header";
  
- const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1';
+ const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://m-pesa-shield-1.onrender.com/api/v1';
  
  const Contact = () => {
    const [formData, setFormData] = useState({
@@ -86,21 +87,7 @@
    return (
      <div className="min-h-screen bg-background">
        {/* Header */}
-       <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50">
-         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-           <Link to="/" className="flex items-center gap-2">
-             <ShieldIcon className="w-8 h-8 text-primary" variant="safe" />
-             <span className="font-display font-bold text-xl text-foreground">
-               TrustGuard<span className="text-primary">Unit</span>
-             </span>
-           </Link>
-           <div className="flex items-center gap-3">
-             <Link to="/signin">
-               <Button variant="ghost" size="sm">Sign In</Button>
-             </Link>
-           </div>
-         </div>
-       </header>
+        <Header />
  
        {/* Hero */}
        <section className="pt-32 pb-12 px-4 bg-gradient-hero">

@@ -13,7 +13,7 @@ interface Message {
   timestamp: Date;
 }
 
- const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1';
+ const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://m-pesa-shield-1.onrender.com/api/v1';
  const MAX_HISTORY = 10;
  
  const SYSTEM_PROMPT = `You are TrustGuard Assistant, an AI assistant for TrustGuardUnit - a fraud detection platform.

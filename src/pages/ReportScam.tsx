@@ -15,7 +15,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { normalizePhone } from "@/lib/phone";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://m-pesa-shield-1.onrender.com/api/v1';
 
 type ReportType = "call" | "sms" | "payment" | "other";
 type ScamCategory = "mpesa_fraud" | "phishing" | "impersonation" | "fake_prize" | "investment_scam" | "loan_scam" | "other";

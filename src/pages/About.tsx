@@ -1,4 +1,5 @@
 import { ShieldIcon } from "@/components/icons/ShieldIcon";
+import {Header} from "@/components/Header";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "react-router-dom";
@@ -121,24 +122,7 @@ const About = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <ShieldIcon className="w-8 h-8 text-primary" variant="safe" />
-            <span className="font-display font-bold text-xl text-foreground">
-              Scam<span className="text-primary">Alert</span>
-            </span>
-          </Link>
-          <div className="flex items-center gap-3">
-            <Link to="/signin">
-              <Button variant="ghost" size="sm">Sign In</Button>
-            </Link>
-            <Link to="/app">
-              <Button variant="default" size="sm">Try ScamAlert</Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+      <Header />
 
       {/* Hero */}
       <section className="pt-32 pb-16 px-4 bg-gradient-hero">

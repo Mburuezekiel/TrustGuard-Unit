@@ -14,7 +14,7 @@
  import { useToast } from "@/hooks/use-toast";
  import { Progress } from "@/components/ui/progress";
  
- const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/v1';
+ const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://m-pesa-shield-1.onrender.com/api/v1';
  
  type VerificationStatus = "idle" | "uploading" | "verifying" | "verified" | "rejected";
  

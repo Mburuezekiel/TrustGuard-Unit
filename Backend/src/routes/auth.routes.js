@@ -5,26 +5,26 @@ const authController = require('../controllers/auth.controller');
 const { protect } = require('../middleware/auth');
 
 // Normalize common phone formats to E.164 (Kenya-friendly)
-const normalizePhone = (value) => {
-  let v = String(value ?? '').trim();
-  if (!v) return v;
+// const normalizePhone = (value) => {
+//   let v = String(value ?? '').trim();
+//   if (!v) return v;
 
-  v = v.replace(/[^\d+]/g, '');
-  if (v.startsWith('00')) v = `+${v.slice(2)}`;
+//   v = v.replace(/[^\d+]/g, '');
+//   if (v.startsWith('00')) v = `+${v.slice(2)}`;
 
-  if (!v.startsWith('+')) {
-    if (v.startsWith('254')) v = `+${v}`;
-    else if (v.startsWith('0') && v.length === 10) v = `+254${v.slice(1)}`;
-    else if ((v.startsWith('7') || v.startsWith('1')) && v.length === 9) v = `+254${v}`;
-  }
+//   if (!v.startsWith('+')) {
+//     if (v.startsWith('254')) v = `+${v}`;
+//     else if (v.startsWith('0') && v.length === 10) v = `+254${v.slice(1)}`;
+//     else if ((v.startsWith('7') || v.startsWith('1')) && v.length === 9) v = `+254${v}`;
+//   }
 
-  return v;
-};
+//   return v;
+// };
 
 // Validation middleware
 const validateRegistration = [
   body('phone')
-    .customSanitizer(normalizePhone)
+    
     .matches(/^\+[1-9]\d{1,14}$/)
     .withMessage('Please provide a valid phone number'),
   body('password')
@@ -38,7 +38,7 @@ const validateRegistration = [
 
 const validateLogin = [
   body('phone')
-    .customSanitizer(normalizePhone)
+    
     .matches(/^\+[1-9]\d{1,14}$/)
     .withMessage('Please provide a valid phone number'),
   body('password')

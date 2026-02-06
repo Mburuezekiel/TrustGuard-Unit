@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { authAPI, setAuthToken, getAuthToken } from "@/services/api";
-import { normalizePhone } from "@/lib/phone";
+// import { normalizePhone } from "@/lib/phone";
 
 interface User {
   id: string;
@@ -54,12 +54,9 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const login = async (phone: string, password: string) => {
     try {
-      const normalizedPhone = normalizePhone(phone);
-      if (!normalizedPhone) {
-        return { success: false, error: "Please enter a valid phone number" };
-      }
+      
 
-      const result = await authAPI.login(normalizedPhone, password);
+      const result = await authAPI.login(phone, password);
       if (result.success && result.data) {
         setAuthToken(result.data.token);
         setUser(result.data.user);
@@ -73,12 +70,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   const register = async (phone: string, password: string, email?: string, name?: string) => {
     try {
-      const normalizedPhone = normalizePhone(phone);
-      if (!normalizedPhone) {
+      
+      if (!phone) {
         return { success: false, error: "Please enter a valid phone number" };
       }
 
-      const result = await authAPI.register(normalizedPhone, password, email, name);
+      const result = await authAPI.register(phone, password, email, name);
       if (result.success && result.data) {
         const data = result.data as { token: string; user: User };
         // Auto-login after registration

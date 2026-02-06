@@ -6,6 +6,7 @@ import { ShieldIcon } from "@/components/icons/ShieldIcon";
 import { Link } from "react-router-dom";
  import { MpesaPaymentModal } from "@/components/MpesaPaymentModal";
  import { useToast } from "@/hooks/use-toast";
+import {Header} from "@/components/Header";
 
 const pricingPlans = [
   {
@@ -111,24 +112,7 @@ const Pricing = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-background/80 border-b border-border/50">
-        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2">
-            <ShieldIcon className="w-8 h-8 text-primary" variant="safe" />
-            <span className="font-display font-bold text-xl text-foreground">
-              TrustGuard<span className="text-primary">Unit</span>
-            </span>
-          </Link>
-          <div className="flex items-center gap-3">
-            <Link to="/signin">
-              <Button variant="ghost" size="sm">Sign In</Button>
-            </Link>
-            <Link to="/signup">
-              <Button variant="default" size="sm">Get Started</Button>
-            </Link>
-          </div>
-        </div>
-      </header>
+        <Header />
 
       {/* Hero */}
       <section className="pt-32 pb-16 px-4">

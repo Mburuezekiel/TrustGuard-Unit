@@ -100,7 +100,7 @@ const ScamAlertApp: React.FC = () => {
           <Link to="/" className="flex items-center gap-2">
             <ShieldIcon className="w-8 h-8 text-primary" variant="safe" />
             <span className="font-display font-bold text-xl text-foreground">
-              Scam<span className="text-primary">Alert</span>
+              TrustGuard<span className="text-primary">Unit</span>
             </span>
           </Link>
           <div className="flex items-center gap-3">
