@@ -47,23 +47,23 @@ const SignUp = () => {
 
     setIsLoading(true);
  
-     const result = await register(formData.phone, formData.password, formData.email, formData.name);
-     
-     if (result.success) {
+    const result = await register(formData.phone, formData.password, formData.email, formData.name);
+    
+    if (result.success) {
       toast({
-        title: "Account created!",
-         description: "Please sign in with your credentials.",
+        title: "Welcome to ScamAlert!",
+        description: "Your account is ready. Let's protect you from scams.",
       });
-      navigate("/signin");
-     } else {
-       toast({
-         title: "Registration failed",
-         description: result.error || "Please try again.",
-         variant: "destructive",
-       });
-     }
-     
-     setIsLoading(false);
+      navigate("/app");
+    } else {
+      toast({
+        title: "Registration failed",
+        description: result.error || "Please try again.",
+        variant: "destructive",
+      });
+    }
+    
+    setIsLoading(false);
   };
 
   return (

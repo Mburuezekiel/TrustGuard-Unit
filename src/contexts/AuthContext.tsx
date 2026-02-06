@@ -60,17 +60,20 @@
      }
    };
  
-   const register = async (phone: string, password: string, email?: string, name?: string) => {
-     try {
-       const result = await authAPI.register(phone, password, email, name);
-       if (result.success) {
-         return { success: true };
-       }
-       return { success: false, error: result.error || "Registration failed" };
-     } catch (error) {
-       return { success: false, error: "Network error. Please try again." };
-     }
-   };
+  const register = async (phone: string, password: string, email?: string, name?: string) => {
+    try {
+      const result = await authAPI.register(phone, password, email, name);
+      if (result.success && result.data) {
+        // Auto-login after registration
+        setAuthToken(result.data.token);
+        setUser(result.data.user);
+        return { success: true };
+      }
+      return { success: false, error: result.error || "Registration failed" };
+    } catch (error) {
+      return { success: false, error: "Network error. Please try again." };
+    }
+  };
  
    const logout = () => {
      setAuthToken(null);
